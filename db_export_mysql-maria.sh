@@ -15,8 +15,8 @@ do
   mysqldump -u DBUSER -pDBPASS "$database" > "$backupDIR"/"$database".sql; 
 done <"$dblist"
 
-tar -cvzf "$backupDIR"/databases/"$date".tar.gz "$backupDIR"/*.sql
+tar -czf "$backupDIR"/databases/"$date".tar.gz "$backupDIR"/*.sql
 
 #clean up the list of files and the database dumps
-#rm "$backupDIR"/databases.txt
+rm "$backupDIR"/databases.txt
 rm "$backupDIR"/*.sql
