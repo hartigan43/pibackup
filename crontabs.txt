@@ -1,6 +1,6 @@
 #Cronjobs used in conjunction with scripts to sync /var/www from server to a raspberrypi backup
-#Every 30 days, the rsync backups on the pi are compressed and archived.  They are replaced by a
-#fresh sync the next day.  Databases are exported daily and compressed.
+#Every 7 days, the rsync backups on the pi are compressed and archived.
+#Databases are exported daily and compressed.
 
 ##
 #SERVER
@@ -18,7 +18,7 @@
 0 23 * * *  rsync -az -e "ssh -p PORT -i KEY" BACKUPUSER@SERVER:/var/www/\* /home/backups/files
 
 #SCP the nightly DB dumps to the pi
-0 2 * * * scp -P 3120 BACKUPUSER@SERVER:/home/BACKUPSUSER/backups/databases/*.tar.gz /home/backups/databases
+0 2 * * * scp -P 3120 BACKUPUSER@SERVER:/home/BACKUPSUSER/backups/databases/\*.tar.gz /home/backups/databases
 
-#Runs static files compression monthly
-@monthly /home/backups/scripts/static_rotation.sh
+#Runs static files compression weekly - keeping a months worth
+@weekly /home/backups/scripts/static_rotation.sh
