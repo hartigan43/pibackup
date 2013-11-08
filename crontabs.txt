@@ -9,6 +9,7 @@
 #Run the database backup and compression script
 #This runs at 20:00 server time which is set to UTC 
 0 20 * * *  /home/backups/scripts/db_backups.sh
+@weekly /home/backups/scripts/archive_removal.sh
 
 ##
 #PI / BACKUP SERVER
