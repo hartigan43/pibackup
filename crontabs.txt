@@ -15,11 +15,11 @@
 #PI / BACKUP SERVER
 ##
 
-#Rsync directories every night
-0 23 * * *  rsync -az -e "ssh -p PORT -i KEY" BACKUPUSER@SERVER:/var/www/\* /home/backups/files
-
+#Rsync directories and apache vhosts every night
+0 23 * * *  rsync -az -e "ssh -p PORT -i KEY" BACKUPUSER@SERVER:/var/www/\* /home/backups/Backups/files
+0 23 * * * rsync -az -e "ssh -p PORT -i KEY" BACKUPSUSER@SERVER:/etc/apache2/sites-available/\* /home/backups/Backups/vhosts
 #SCP the nightly DB dumps to the pi
-0 2 * * * scp -P 3120 BACKUPUSER@SERVER:/home/BACKUPSUSER/backups/databases/\*.tar.gz /home/backups/databases
+0 2 * * * scp -P PORT BACKUPUSER@SERVER:/home/BACKUPSUSER/backups/databases/\*.tar.gz /home/backups/Backups/databases
 
 #Runs static files compression weekly - keeping a months worth
 @weekly /home/backups/scripts/static_rotation.sh
