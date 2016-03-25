@@ -5,7 +5,7 @@
 backupDIR=""$HOME"/backups"
 date=$(date '+%Y_%m_%d')
 
-#create list of all tables in the database
+#create list of all databases on localhost
 mysql -u DBUSER -pDBPASS --execute='show databases;' | tail -n +2 | sed -e '/mysql/d' -e '/information_schema/d' | cat > "$backupDIR"/databases.txt
 
 #dump all the databases - create user with read only access to all databases for dump
