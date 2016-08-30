@@ -1,4 +1,0 @@
-#! /bin/sh
-# change for files older than a week
-rm /home/backups/backups/databases/*.tar.gz
-
